@@ -79,9 +79,10 @@ pub(crate) mod download {
     }
 
     pub(crate) fn platform_info() -> Result<(&'static str, &'static str)> {
-        let os = std::env::var("CARGO_CFG_TARGET_OS").unwrap_or_default();
-        let arch = std::env::var("CARGO_CFG_TARGET_ARCH").unwrap_or_default();
-
+        // let os = std::env::var("CARGO_CFG_TARGET_OS").unwrap_or_default();
+        // let arch = std::env::var("CARGO_CFG_TARGET_ARCH").unwrap_or_default();
+        let os = std::env::consts::OS.to_string();
+        let arch = std::env::consts::ARCH.to_string();
         for &(p_os, p_arch, asset) in PLATFORM_ASSETS {
             if os == p_os && arch == p_arch {
                 let exe = if os == "windows" {
